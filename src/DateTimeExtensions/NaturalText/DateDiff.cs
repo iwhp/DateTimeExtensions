@@ -59,6 +59,14 @@ namespace DateTimeExtensions.NaturalText
                 Days += daysInMonth - startDate.Day + endDate.Day;
             }
 
+            //adjust month difference for february and leap years
+            var daysInMonthForEndDate = DateTime.DaysInMonth(endDate.Year, endDate.Month);
+            if (daysInMonthForEndDate > 27 && daysInMonthForEndDate <= 29 && Days > 27 && Days <= 29)
+            {
+                Months = 0;
+                Days = 0;
+            }
+
             if (Months + endDate.Month >= startDate.Month)
             {
                 Months += endDate.Month - startDate.Month;
