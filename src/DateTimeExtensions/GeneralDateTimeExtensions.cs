@@ -126,7 +126,7 @@ namespace DateTimeExtensions
 
         public static DateTime SetTime(this DateTime date, int hour, int minute, int second, int millisecond)
         {
-            return new DateTime(date.Year, date.Month, date.Day, hour, minute, second, millisecond);
+            return new DateTime(date.Year, date.Month, date.Day, hour, minute, second, millisecond, date.Kind);
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace DateTimeExtensions
         /// <returns>The new floored DateTime object</returns>
         public static DateTime Floor(this DateTime dt, TimeSpan interval)
         {
-            return dt.AddTicks(-(dt.Ticks%interval.Ticks));
+            return dt.AddTicks(-(dt.Ticks % interval.Ticks));
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace DateTimeExtensions
         /// <returns>The new ceilinged DateTime object</returns>
         public static DateTime Ceiling(this DateTime dt, TimeSpan interval)
         {
-            return dt.AddTicks(interval.Ticks - (dt.Ticks%interval.Ticks));
+            return dt.AddTicks(interval.Ticks - (dt.Ticks % interval.Ticks));
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace DateTimeExtensions
         public static DateTime Round(this DateTime dt, TimeSpan interval)
         {
             var halfIntervalTicks = ((interval.Ticks + 1) >> 1);
-            return dt.AddTicks(halfIntervalTicks - ((dt.Ticks + halfIntervalTicks)%interval.Ticks));
+            return dt.AddTicks(halfIntervalTicks - ((dt.Ticks + halfIntervalTicks) % interval.Ticks));
         }
 
         /// <summary>
